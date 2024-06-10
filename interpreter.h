@@ -5,6 +5,8 @@
 
 #include "variables.h"
 
+#include "input.h"
+
 bool preProcessor(std::vector<std::vector<std::string>> *turlFile) {
 	for (int i = 0; i < turlFile->size(); i++) {
 		if (turlFile->at(i).at(0) == "mark") {
@@ -230,14 +232,14 @@ bool interpret(std::vector<std::string> inst, int line, int *lnptr) { //True = s
 					std::cout << "[Number Reference Error] (Line " << line << ") " << inst.at(i+1);
 					return false;
 				}
-				std::cin >> numbers.at(getNumber(inst.at(i+1))).value;
+				input() >> numbers.at(getNumber(inst.at(i+1))).value;
 			}
 			else if (inst.at(i) == "string") {
 				if (!stringExists(inst.at(i+1))) {
 					std::cout << "[String Reference Error] (Line " << line << ") " << inst.at(i+1);
 					return false;
 				}
-				std::cin >> strings.at(getString(inst.at(i+1))).value;
+				input() >> strings.at(getString(inst.at(i+1))).value;
 			}
 			else {
 				std::cout << "[Invalid Input Type] (Line " << line << ") " << inst.at(i) << std::endl;
